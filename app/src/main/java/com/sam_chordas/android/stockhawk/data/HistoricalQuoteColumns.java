@@ -12,9 +12,9 @@ public class HistoricalQuoteColumns {
   @DataType(DataType.Type.INTEGER) @PrimaryKey @AutoIncrement
   public static final String _ID = "_id";
   @DataType(DataType.Type.TEXT) @NotNull
-  public static final String SYMBOL = "symbol";
+  public static final String SYMBOL = "Symbol";
   @DataType(DataType.Type.TEXT) @NotNull
-  public static final String DATE = "date";
+  public static final String DATE = "Date";
   @DataType(DataType.Type.TEXT) @NotNull
-  public static final String CLOSE = "close";
+  public static final String CLOSE = "Close";
 }

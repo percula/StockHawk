@@ -90,7 +90,7 @@ public class StockTaskService extends GcmTaskService {
                 initQueryCursor.moveToFirst();
                 for (int i = 0; i < initQueryCursor.getCount(); i++) {
                     mStoredSymbols.append("\"" +
-                            initQueryCursor.getString(initQueryCursor.getColumnIndex("symbol")) + "\",");
+                            initQueryCursor.getString(initQueryCursor.getColumnIndex(QuoteColumns.SYMBOL)) + "\",");
                     initQueryCursor.moveToNext();
                 }
                 mStoredSymbols.replace(mStoredSymbols.length() - 1, mStoredSymbols.length(), ")");
@@ -120,7 +120,6 @@ public class StockTaskService extends GcmTaskService {
 
         if (urlStringBuilder != null) {
             urlString = urlStringBuilder.toString();
-            Log.v("URL String", urlString);
             try {
                 getResponse = fetchData(urlString);
                 result = GcmNetworkManager.RESULT_SUCCESS;
@@ -203,15 +202,12 @@ public class StockTaskService extends GcmTaskService {
 
             if (urlHistoricalStringBuilder != null) {
                 urlHistoricalString = urlHistoricalStringBuilder.toString();
-                Log.v("URLHist String", urlHistoricalString);
                 try {
                     getHistoricalResponse = fetchData(urlHistoricalString);
                     historicalResult = GcmNetworkManager.RESULT_SUCCESS;
                     try {
                         // Get content resolver
                         ContentResolver contentResolver = mContext.getContentResolver();
-
-                        Log.v("historicalquotes", HistoricalQuoteColumns.SYMBOL + " = \"" + stockSymbol + "\"");
 
                         // Delete any previous data matching the stock symbol
                         contentResolver.delete(QuoteProvider.HistoricalQuotes.CONTENT_URI,
@@ -220,7 +216,6 @@ public class StockTaskService extends GcmTaskService {
                         // Add the data to the database
                         mContext.getContentResolver().applyBatch(QuoteProvider.AUTHORITY,
                                 Utils.historicalQuoteJsonToContentVals(getHistoricalResponse));
-                        Log.v("Add Data", "added!");
 
                     } catch (RemoteException | OperationApplicationException e) {
                         Log.e(LOG_TAG, "Error applying batch insert", e);
@@ -239,10 +234,6 @@ public class StockTaskService extends GcmTaskService {
             historicalQueryCursor.moveToNext();
         }
 
-        // Close the cursors
-//    if (null != initQueryCursor) {
-//      initQueryCursor.close();
-//    }
         historicalQueryCursor.close();
 
         return result;

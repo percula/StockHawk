@@ -28,6 +28,15 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.LineGraphActivity"
+            android:label="@string/activity_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
+        </activity>
+
         <service
             android:name=".service.StockTaskService"
             android:exported="true"
@@ -41,9 +50,19 @@
         <provider
             android:name=".data.generated.QuoteProvider"
             android:authorities="com.sam_chordas.android.stockhawk.data.QuoteProvider"
-            android:exported="false" />
+            android:exported="true" />
 
-        <activity android:name=".ui.LineGraphActivity"></activity>
+        <service
+            android:name=".widget.DetailWidgetRemoteViewsService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <receiver android:name=".widget.DetailWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/widget_detail_info" />
+        </receiver>
     </application>
 
 </manifest>

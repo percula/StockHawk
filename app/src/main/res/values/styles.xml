@@ -21,4 +21,15 @@
     <item name="android:textAllCaps">true</item>
   </style>
 
+  <!--Widget Styles-->
+  <style name="PercentChangeTextStyleWidget">
+    <item name="android:textColor">#FFF</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+  <style name="BidPriceTextStyleWidget">
+  </style>
+  <style name="StockSymbolTextStyleWidget">
+    <item name="android:textAllCaps">true</item>
+  </style>
+
 </resources>

@@ -7,11 +7,11 @@
 
     <include layout="@layout/list_item_quote" />
 
-    <!--<com.db.chart.view.LineChartView-->
-        <!--xmlns:chart="http://schemas.android.com/apk/res-auto"-->
-        <!--android:id="@+id/linechart"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"/>-->
+    <com.github.mikephil.charting.charts.LineChart
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>

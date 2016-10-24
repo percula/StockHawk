@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list_item"
     android:layout_width="match_parent"
-    android:layout_height="72dp"
+    android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+    android:padding="8dp">
 
     <TextView
         android:id="@+id/stock_symbol"
-        style="@style/StockSymbolTextStyle"
+        style="@style/StockSymbolTextStyleWidget"
+        android:textSize="?android:textAppearanceMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="start|center_vertical"
@@ -26,32 +26,27 @@
 
         <TextView
             android:id="@+id/bid_price"
-            style="@style/BidPriceTextStyle"
+            style="@style/BidPriceTextStyleWidget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="10sp"
+            android:textSize="?android:textAppearanceMedium"
             android:paddingStart="10sp"
-            android:paddingRight="10sp"
+            android:paddingLeft="10sp"
             android:paddingEnd="10sp"
+            android:paddingRight="10sp"
             tools:text="1000.00" />
 
         <TextView
             android:id="@+id/change"
-            style="@style/PercentChangeTextStyle"
+            style="@style/PercentChangeTextStyleWidget"
+            android:textSize="?android:textAppearanceMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/percent_change_pill"
-            android:paddingLeft="3dp"
             android:paddingStart="3dp"
+            android:paddingLeft="3dp"
             android:paddingRight="3dp"
             android:paddingEnd="3dp"
             tools:text="100%" />
     </LinearLayout>
-    <TextView
-        android:id="@+id/empty"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/widget_title_padding"
-        android:text="@string/symbol_add"
-        android:visibility="gone"/>
 </LinearLayout>

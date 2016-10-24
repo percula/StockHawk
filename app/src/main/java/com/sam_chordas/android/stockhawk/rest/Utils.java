@@ -11,7 +11,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by sam_chordas on 10/8/15.
@@ -125,19 +128,37 @@ public class Utils {
                 QuoteProvider.HistoricalQuotes.CONTENT_URI);
         try {
             String symbol = jsonObject.getString("Symbol");
-            Log.v("Symbol2222", symbol);
             String date = jsonObject.getString("Date");
-            Log.v("Date2222", date);
             String close = jsonObject.getString("Close");
-            Log.v("Close2222", close);
             builder.withValue(HistoricalQuoteColumns.SYMBOL, symbol);
             builder.withValue(HistoricalQuoteColumns.DATE, date);
             builder.withValue(HistoricalQuoteColumns.CLOSE, close);
-            Log.v("buildHistorical", symbol + ", " + date + ", " + close);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return builder.build();
+    }
+
+    /**
+     * This function converts dates to floats, assuming they are in "yyyy-MM-dd" format
+     * @param dateString
+     * @return
+     */
+    public static float convertDateToFloat(String dateString) {
+        // Using english locale so that the date format will not change and break the API call
+        SimpleDateFormat fromDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        SimpleDateFormat toDateFormat = new SimpleDateFormat("yyyyDDD", Locale.ENGLISH);
+
+        Date originalDate = new Date();
+
+        try {
+            originalDate = fromDateFormat.parse(dateString);
+        } catch (Exception e) {
+            Log.e(LOG_TAG,"Input date not in correct format");
+        }
+
+        String newDate = toDateFormat.format(originalDate);
+        return Float.parseFloat(newDate);
     }
 }
